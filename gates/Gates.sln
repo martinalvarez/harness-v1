@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gates.Api.Tests", "Gates.Api.Tests\Gates.Api.Tests.csproj", "{ABF2B954-D89D-407D-8EC3-612677000401}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gates.Architecture.Tests", "Gates.Architecture.Tests\Gates.Architecture.Tests.csproj", "{56214424-620E-431C-B5C2-0EC9AD12DA9C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABF2B954-D89D-407D-8EC3-612677000401}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABF2B954-D89D-407D-8EC3-612677000401}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABF2B954-D89D-407D-8EC3-612677000401}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABF2B954-D89D-407D-8EC3-612677000401}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56214424-620E-431C-B5C2-0EC9AD12DA9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56214424-620E-431C-B5C2-0EC9AD12DA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56214424-620E-431C-B5C2-0EC9AD12DA9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56214424-620E-431C-B5C2-0EC9AD12DA9C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
