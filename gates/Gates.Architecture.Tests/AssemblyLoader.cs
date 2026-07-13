@@ -25,9 +25,12 @@ internal static class AssemblyLoader
                 "Implement /src per specs before this gate can pass.");
         }
 
-        var dll = Directory.EnumerateFiles(projectDir, $"{projectName}.dll", SearchOption.AllDirectories)
-            .OrderByDescending(File.GetLastWriteTimeUtc)
-            .FirstOrDefault();
+        var binDir = Path.Combine(projectDir, "bin");
+        var dll = Directory.Exists(binDir)
+            ? Directory.EnumerateFiles(binDir, $"{projectName}.dll", SearchOption.AllDirectories)
+                .OrderByDescending(File.GetLastWriteTimeUtc)
+                .FirstOrDefault()
+            : null;
 
         if (dll is null)
         {
