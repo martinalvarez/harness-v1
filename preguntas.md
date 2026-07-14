@@ -109,3 +109,55 @@ pantalla, señalar 2-3 líneas puntuales y traducirlas en el momento
 ("acá dice que Price tiene que ser mayor a cero...") para que quede
 claro que no se esconde nada, simplemente se eligió el idioma de
 trabajo por velocidad.
+
+## 8. El contenido de `gates` ¿cómo apareció? ¿Está muy atado a este proyecto o podría ser genérico?
+
+### Cómo apareció
+
+No se generó en esta conversación. Viene de una sesión anterior
+(documentada en `CHAT.md` y en la sección 5 de `harness-sdd-8090.md`):
+se le dio a Claude Code un prompt bastante detallado pidiendo
+específicamente esta estructura — un proyecto xUnit con casos derivados
+de `verification.md`, reglas NetArchTest que hagan cumplir la
+`constitution` (controllers sin EF Core directo, Domain sin
+Infrastructure, naming de controllers), y un `.editorconfig` con
+analyzers en warning-as-error. El agente de esa sesión tomó esas
+instrucciones y las convirtió en el código concreto (los 18 tests,
+`AssemblyLoader.cs`, etc.) — el prompt dio el *qué*, el agente resolvió
+el *cómo*. Después, en el ensayo de esta semana, se encontraron y
+arreglaron 2 bugs sobre ese código heredado (`AssemblyLoader` cargando
+ref assemblies, y el `Async` suffix en el controller).
+
+### ¿Genérico o atado a este proyecto?
+
+Se divide limpio en dos partes:
+
+**Genérico (reutilizable en cualquier proyecto .NET con esta
+convención de capas):**
+
+- `AssemblyLoader.cs` — recibe un nombre de proyecto como string, cero
+  conocimiento de "Products".
+- Las 5 reglas de `ArchitectureGateTests.cs` (`ARCH01..05`) — solo
+  referencian nombres de ensamblado (`Api`, `Domain`, `Infrastructure`)
+  y la convención de naming de controllers. Servirían igual para Tax
+  Opinion, Tax Apportionment, o cualquier feature, siempre que se
+  mantenga la misma convención Api/Application/Domain/Infrastructure.
+- `.editorconfig` — reglas de naming/estilo puras de C#, sin ningún
+  acoplamiento a dominio.
+- El patrón de `ApiFixture.cs` + tests *black-box* por HTTP (sin
+  `ProjectReference` a `/src`) — técnica genérica para que los gates
+  compilen sin que la app exista todavía.
+- `verify.ps1` / `.sh` — el loop de build+test+exit-code, cero
+  conocimiento de dominio.
+
+**Específico de este proyecto (Products CRUD):**
+
+- Solo `ProductsApiGateTests.cs` — los 13 tests `AC-01..13` están
+  escritos contra `/api/products`, con el shape exacto de `Product`
+  (Name/Price/Stock) y sus reglas de negocio puntuales.
+
+Y eso es esperable, no un defecto: los tests funcionales tienen que
+reflejar la spec de la feature 1:1 — si mañana cambia el dominio (por
+ejemplo a Tax Opinion), se reescribe `verification.md` + ese único
+archivo de tests, y el resto de `/gates` se reutiliza sin tocar una
+línea.
