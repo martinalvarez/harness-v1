@@ -88,3 +88,24 @@ verde.
 Después borrar esas dos líneas agregadas (y la del `csproj` si se
 agregó) y correr `verify.ps1` una vez más para cerrar en verde de
 nuevo.
+
+## 7. Las specs están en español pero la demo es en inglés — ¿las dejo así?
+
+Sí, no hace falta traducirlas. Algunas razones:
+
+- Lo que realmente importa desde el punto de vista técnico (nombres de
+  clases, endpoints, `Product`, `Price`, `Stock`, los tests en
+  `/gates`) ya está en inglés porque es código C#. Lo que está en
+  español es solo la prosa explicativa de las specs.
+- El guion (`GUION.md` / `guion-eng.md`) ya prevé parafrasear cada
+  sección en inglés mientras se muestra en pantalla — la audiencia no
+  necesita leer el español, lo escucha explicado. Eso ya cubre el gap.
+- Encaja con el mensaje de "minimalista, no me fui por las ramas" —
+  traducir 3 documentos que no cambian el mecanismo del harness sería
+  tiempo mal gastado.
+
+Consejo práctico: al mostrar `constitution.md` o `products-spec.md` en
+pantalla, señalar 2-3 líneas puntuales y traducirlas en el momento
+("acá dice que Price tiene que ser mayor a cero...") para que quede
+claro que no se esconde nada, simplemente se eligió el idioma de
+trabajo por velocidad.
