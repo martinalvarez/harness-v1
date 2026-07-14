@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Harness — Backup FAQ</title>
+<style>
+  :root {
+    --bg: #eef2f6;
+    --bg-panel: #ffffff;
+    --ink: #122236;
+    --ink-dim: #5b6f84;
+    --ink-faint: #8fa0b2;
+    --accent: #b9740f;
+    --rule: rgba(18, 34, 54, 0.14);
+    --rule-strong: rgba(18, 34, 54, 0.28);
+    --shadow: 0 20px 60px -20px rgba(18, 34, 54, 0.35);
+
+    --font-display: "Segoe UI Semibold", "Segoe UI", "Segoe UI Variable Display", system-ui, -apple-system, sans-serif;
+    --font-body: "Segoe UI", "Segoe UI Variable Text", system-ui, -apple-system, sans-serif;
+    --font-mono: Consolas, "Cascadia Code", "SFMono-Regular", Menlo, ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0c1826;
+      --bg-panel: #122437;
+      --ink: #eef3f8;
+      --ink-dim: #9fb3c8;
+      --ink-faint: #64798d;
+      --accent: #f0a742;
+      --rule: rgba(159, 179, 200, 0.16);
+      --rule-strong: rgba(159, 179, 200, 0.30);
+      --shadow: 0 25px 70px -20px rgba(0, 0, 0, 0.6);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0c1826; --bg-panel: #122437; --ink: #eef3f8; --ink-dim: #9fb3c8;
+    --ink-faint: #64798d; --accent: #f0a742; --rule: rgba(159, 179, 200, 0.16);
+    --rule-strong: rgba(159, 179, 200, 0.30); --shadow: 0 25px 70px -20px rgba(0, 0, 0, 0.6);
+  }
+  :root[data-theme="light"] {
+    --bg: #eef2f6; --bg-panel: #ffffff; --ink: #122236; --ink-dim: #5b6f84;
+    --ink-faint: #8fa0b2; --accent: #b9740f; --rule: rgba(18, 34, 54, 0.14);
+    --rule-strong: rgba(18, 34, 54, 0.28); --shadow: 0 20px 60px -20px rgba(18, 34, 54, 0.35);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); }
+  body {
+    background-image:
+      linear-gradient(var(--rule) 1px, transparent 1px),
+      linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+    background-size: 48px 48px;
+    background-position: -1px -1px;
+    min-height: 100vh;
+  }
+  h1 { font-family: var(--font-display); margin: 0; text-wrap: balance; }
+  a { color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 8vh 8vw 10vh;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    text-decoration: none;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid transparent;
+  }
+  .back-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    margin-bottom: 1.4rem;
+  }
+  .eyebrow::before { content: ""; width: 7px; height: 7px; background: var(--accent); display: inline-block; }
+
+  h1 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 700; line-height: 1.12; max-width: 20ch; }
+
+  .faq {
+    margin-top: 3.2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .faq-item {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    gap: 1.4rem;
+    padding: 1.8rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  .faq-item:last-child { border-bottom: 1px solid var(--rule); }
+  .faq-num { font-family: var(--font-mono); color: var(--ink-faint); font-size: 0.9rem; padding-top: 0.15rem; }
+  .faq-q { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; margin-bottom: 0.6rem; text-wrap: balance; }
+  .faq-a { color: var(--ink-dim); font-size: 1rem; line-height: 1.6; max-width: 62ch; }
+  .faq-a code {
+    font-family: var(--font-mono);
+    background: var(--bg-panel);
+    border: 1px solid var(--rule-strong);
+    padding: 0.1em 0.4em;
+    font-size: 0.92em;
+    color: var(--ink);
+  }
+
+  @media (max-width: 640px) {
+    .faq-item { grid-template-columns: 1fr; gap: 0.4rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <a class="back-link" href="index.html">&larr; back to deck</a>
+
+  <div class="eyebrow">Backup — In Case They Ask</div>
+  <h1>Anticipated questions</h1>
+
+  <div class="faq">
+    <div class="faq-item">
+      <div class="faq-num">01</div>
+      <div>
+        <div class="faq-q">What if the agent edits the gates so they pass?</div>
+        <div class="faq-a">Real gap in this minimal demo. The guardrail here is the prompt ("don't touch <code>/gates</code>") plus a human reviewing the diff. In a production version, the agent has no write access to <code>/gates</code> at all — that's a permissions problem, not a prompting one.</div>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-num">02</div>
+      <div>
+        <div class="faq-q">Why NetArchTest instead of just a linter?</div>
+        <div class="faq-a">A linter reads syntax and style. NetArchTest inspects the <em>compiled assembly</em> and verifies real dependency relationships between layers — whether the compiler actually generated a reference to another assembly, not just how the code looks.</div>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-num">03</div>
+      <div>
+        <div class="faq-q">Is this .NET-specific?</div>
+        <div class="faq-a">The pattern — specs plus gates plus a feedback loop — is stack-agnostic. Equivalents in other ecosystems: ArchUnit (Java), import-linter (Python), dependency-cruiser (JS/TS).</div>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-num">04</div>
+      <div>
+        <div class="faq-q">Why Greenfield, not Brownfield?</div>
+        <div class="faq-a">A deliberate scope choice for this week: validate the complete mechanism in the time available. Adapting a Brownfield project to SDD is a logical next step, not something skipped for being technically hard.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
